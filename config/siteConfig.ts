@@ -15,7 +15,7 @@ export const siteConfig = {
   },
   
   email: {
-    address: "wasayrajput2450786123@gmail.com",
+    address: "rajpootwasay77@gmail.com",
     serviceId: "service_roxel", // Replace with your EmailJS service ID when setup
     templateId: "template_roxel", // Replace with your EmailJS template ID
     publicKey: "user_roxel_key", // Replace with your EmailJS public key

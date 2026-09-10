@@ -44,13 +44,24 @@ export default function ContactSection() {
           siteConfig.email.publicKey
         );
       } else {
-        // Automatically launch mailto pre-filled client email
-        const mailtoUrl = `mailto:${siteConfig.email.address}?subject=${encodeURIComponent(
-          `Project Inquiry: ${formData.service} (${formData.name})`
-        )}&body=${encodeURIComponent(
-          `Name: ${formData.name}\nEmail: ${formData.email}\nService: ${formData.service}\n\nProject Brief:\n${formData.message}`
-        )}`;
-        window.location.href = mailtoUrl;
+        const subject = `Project Inquiry: ${formData.service} (${formData.name})`;
+        const body = `Name: ${formData.name}\nEmail: ${formData.email}\nService: ${formData.service}\n\nProject Brief:\n${formData.message}`;
+
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+
+        if (isMobile) {
+          window.location.href = `mailto:${siteConfig.email.address}?subject=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`;
+        } else {
+          const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${
+            siteConfig.email.address
+          }&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.open(gmailWebUrl, "_blank");
+        }
+
         await new Promise((res) => setTimeout(res, 600));
       }
 
