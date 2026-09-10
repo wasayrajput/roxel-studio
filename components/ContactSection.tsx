@@ -44,7 +44,14 @@ export default function ContactSection() {
           siteConfig.email.publicKey
         );
       } else {
-        await new Promise((res) => setTimeout(res, 800));
+        // Automatically launch mailto pre-filled client email
+        const mailtoUrl = `mailto:${siteConfig.email.address}?subject=${encodeURIComponent(
+          `Project Inquiry: ${formData.service} (${formData.name})`
+        )}&body=${encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\nService: ${formData.service}\n\nProject Brief:\n${formData.message}`
+        )}`;
+        window.location.href = mailtoUrl;
+        await new Promise((res) => setTimeout(res, 600));
       }
 
       setSubmitted(true);
